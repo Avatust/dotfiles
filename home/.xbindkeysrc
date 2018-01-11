@@ -1,0 +1,8 @@
+"xdotool click 4"
+    Shift+Mod5 + k
+"xdotool click 5"
+    Shift+Mod5 + j
+"xdotool click 6"
+    Shift+Mod5 + h
+"xdotool click 7"
+    Shift+Mod5 + l

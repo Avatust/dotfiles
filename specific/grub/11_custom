@@ -1,0 +1,41 @@
+#!/bin/sh
+exec tail -n +3 $0
+# This file provides an easy way to add custom menu entries.  Simply type the
+# menu entries you want to add after this comment.  Be careful not to change
+# the 'exec tail' line above.
+
+menuentry 'Arch Linux with Deepin on start' --class _arch --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-8e54e9ab-ef7a-4e52-be1c-36c6574e95d4' {
+	load_video
+	set gfxpayload=keep
+	insmod gzio
+	insmod part_gpt
+	insmod fat
+	set root='hd0,gpt2'
+	if [ x$feature_platform_search_hint = xy ]; then
+	  search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt2 --hint-efi=hd0,gpt2 --hint-baremetal=ahci0,gpt2  F00F-D73A
+	else
+	  search --no-floppy --fs-uuid --set=root F00F-D73A
+	fi
+	echo	'Loading Linux linux ...'
+	linux	/vmlinuz-linux root=UUID=8e54e9ab-ef7a-4e52-be1c-36c6574e95d4 rw  quiet DEEPIN_ON_START
+	echo	'Loading initial ramdisk ...'
+	initrd  /intel-ucode.img /initramfs-linux.img
+}
+
+menuentry 'Arch Linux with i3 on start' --class _arch --class gnu-linux --class gnu --class os $menuentry_id_option 'gnulinux-simple-8e54e9ab-ef7a-4e52-be1c-36c6574e95d4' {
+	load_video
+	set gfxpayload=keep
+	insmod gzio
+	insmod part_gpt
+	insmod fat
+	set root='hd0,gpt2'
+	if [ x$feature_platform_search_hint = xy ]; then
+	  search --no-floppy --fs-uuid --set=root --hint-bios=hd0,gpt2 --hint-efi=hd0,gpt2 --hint-baremetal=ahci0,gpt2  F00F-D73A
+	else
+	  search --no-floppy --fs-uuid --set=root F00F-D73A
+	fi
+	echo	'Loading Linux linux ...'
+	linux	/vmlinuz-linux root=UUID=8e54e9ab-ef7a-4e52-be1c-36c6574e95d4 rw  quiet I3_ON_START
+	echo	'Loading initial ramdisk ...'
+	initrd  /intel-ucode.img /initramfs-linux.img
+}

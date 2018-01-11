@@ -1,0 +1,10 @@
+[Unit]
+Description='Starts Deepin DE if the respective boot option was selected'
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c 'if grep -q DEEPIN_ON_START /proc/cmdline; then exec systemctl start lightdm.service; fi'
+RemainAfterExit=no
+
+[Install]
+WantedBy=multi-user.target
