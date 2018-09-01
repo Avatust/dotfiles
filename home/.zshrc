@@ -32,3 +32,8 @@ bindkey -v
 if [ -f ~/.aliases ]; then
     source ~/.aliases
 fi
+
+# Add exported paths
+if [ -f ~/.export_paths ]; then
+    source ~/.export_paths
+fi
