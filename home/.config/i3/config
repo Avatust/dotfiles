@@ -9,10 +9,9 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
-
-# set directory where scripts related to i3 can be found
-set $scripts_dir ~/.config/i3/scripts
+set $mod Mod4
+set $SCRIPTS_DIR ~/dotfiles/home/.config/i3/scripts
+set $PRIMARY_OUTPUT eDP1
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -106,6 +105,7 @@ bindsym $mod+Shift+a focus child
 workspace_auto_back_and_forth yes
 
 # Workspace name variables
+set $workspacePrimary "0:P"
 set $workspace1  1
 set $workspace2  2
 set $workspace3  3
@@ -118,19 +118,20 @@ set $workspace9  9
 set $workspace10 10
 
 # switch to workspace
-bindsym $mod+1 workspace $workspace1
-bindsym $mod+2 workspace $workspace2
-bindsym $mod+3 workspace $workspace3
-bindsym $mod+4 workspace $workspace4
-bindsym $mod+5 workspace $workspace5
-bindsym $mod+6 workspace $workspace6
-bindsym $mod+7 workspace $workspace7
-bindsym $mod+8 workspace $workspace8
-bindsym $mod+9 workspace $workspace9
-bindsym $mod+0 workspace $workspace10
+bindcode $mod+49 workspace $workspacePrimary
+bindsym  $mod+1  workspace $workspace1
+bindsym  $mod+2  workspace $workspace2
+bindsym  $mod+3  workspace $workspace3
+bindsym  $mod+4  workspace $workspace4
+bindsym  $mod+5  workspace $workspace5
+bindsym  $mod+6  workspace $workspace6
+bindsym  $mod+7  workspace $workspace7
+bindsym  $mod+8  workspace $workspace8
+bindsym  $mod+9  workspace $workspace9
+bindsym  $mod+0  workspace $workspace10
 
-bindsym Mod4+Tab workspace next
-bindsym Mod4+Shift+Tab workspace prev
+bindsym $mod+Tab workspace next
+bindsym $mod+Shift+Tab workspace prev
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $workspace1
@@ -144,68 +145,69 @@ bindsym $mod+Shift+8 move container to workspace $workspace8
 bindsym $mod+Shift+9 move container to workspace $workspace9
 bindsym $mod+Shift+0 move container to workspace $workspace10
 
+workspace $workspacePrimary output $PRIMARY_OUTPUT
+
+# cycle monitor setups
+bindsym Mod4+F10 exec --no-startup-id $SCRIPTS_DIR/cycle_monitor_setups.sh
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec --no-startup-id $scripts_dir/exit_prompt.sh
+bindsym $mod+Shift+e exec --no-startup-id $SCRIPTS_DIR/exit_prompt.sh
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+    # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym $move_left  resize shrink width 5 px or 5 ppt
-        bindsym $move_down  resize grow height 5 px or 5 ppt
-        bindsym $move_up    resize shrink height 5 px or 5 ppt
-        bindsym $move_right resize grow width 5 px or 5 ppt
+    # Pressing left will shrink the window’s width.
+    # Pressing right will grow the window’s width.
+    # Pressing up will shrink the window’s height.
+    # Pressing down will grow the window’s height.
+    bindsym $move_left  resize shrink width 5 px or 5 ppt
+    bindsym $move_down  resize grow height 5 px or 5 ppt
+    bindsym $move_up    resize shrink height 5 px or 5 ppt
+    bindsym $move_right resize grow width 5 px or 5 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+    # same bindings, but for the arrow keys
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
-
 bindsym $mod+r mode "resize"
 
 # ignore mode - will remove keybindings except for a returning one
 mode "ignore" {
-	# go back to default mode
-	# Super+Shift+Esc
-	bindsym Mod4+Shift+Escape mode "default"
+    # go back to default mode
+    # Super+Shift+Esc
+    bindsym Mod1+Mod4+Shift+Escape mode "default"
 }
-# enter the ignore mode
-bindsym Mod4+Shift+Escape mode "ignore"
+bindsym Mod1+Mod4+Shift+Escape mode "ignore"
 
 # launch mode - bindings to launch programs
 # use shift to launch and stay in the mode
 mode "launch" {
-	bindsym f exec firefox; mode "default"
-	bindsym Shift+f exec firefox
+    bindsym f exec firefox; mode "default"
+    bindsym Shift+f exec firefox
 
-	# back to normal:
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
-# enter launch mode
 bindsym $mod+Menu mode "launch"
 
 # Lock screen with Super+Pause/Break
-bindsym Mod4+Pause exec i3lock --color=000000 --ignore-empty-password --show-failed-attempts
+bindsym $mod+Pause exec i3lock --color=000000 --ignore-empty-password --show-failed-attempts
 
 # thin borders
 hide_edge_borders both
 
-set $bg-color 	         #2f343f
+set $bg-color            #2f343f
 set $inactive-bg-color   #2f343f
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
@@ -221,24 +223,25 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+    status_command i3status
+    strip_workspace_numbers yes
 
-	colors {
-		background $bg-color
-	    	separator #757575
-		#                  border             background         text
-		focused_workspace  $bg-color          $bg-color          $text-color
-		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-}
+    colors {
+        background $bg-color
+        separator #757575
+        #                  border             background         text
+        focused_workspace  $bg-color          $bg-color          $text-color
+        inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+        urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+    }
 }
 
 # Screenshots
 # PrintScreen - fullscreen
-# Ctrl+PrintScreen - focused window
-# Ctrl+Shift+PrintScreen - mouse selection
 bindsym Print exec scrot $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
+# Ctrl+PrintScreen - focused window
 bindsym Control+Print exec scrot -u $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
+# Ctrl+Shift+PrintScreen - mouse selection
 bindsym --release Control+Shift+Print exec scrot -s $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
 
 # Sreen brightness controls
@@ -246,14 +249,15 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
 
 # Sticky floating windows
-bindsym Mod4+s sticky toggle
+bindsym $mod+Shift+s sticky toggle
 
-bindsym Mod4+o open
+# Empty region
+bindsym $mod+o open
 
 # mark current window for swapping, unmark others
-bindsym Mod1+Tab mark --add --toggle SWAPEE
+bindsym $mod+Control+Tab mark --add --toggle SWAPEE
 # swap current container with SWAPEE
-bindsym Mod1+Shift+Tab swap container with mark SWAPEE
+bindsym $mod+Control+Shift+Tab swap container with mark SWAPEE
 
 # (un)set a VIM-like mark or follow
 bindsym $mod+m exec i3-input -P "Set mark: " -l 1 -F "mark --add --toggle %s"
@@ -266,7 +270,8 @@ bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 
 # Touchpad controls
-bindsym XF86TouchpadToggle exec --no-startup-id $scripts_dir/toggle_touchpad.sh
+# already supported natively #
+#bindsym XF86TouchpadToggle exec --no-startup-id $SCRIPTS_DIR/toggle_touchpad.sh
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
