@@ -64,6 +64,8 @@ xkb_symbols "custom_us" {
     key <SPCE>  { [                    space,                    space,             nobreakspace,             nobreakspace ] };
 
 
-    key <ESC>   { [ Caps_Lock ] };
-    key <CAPS>  { [ Escape, BackSpace, Escape, Escape ] };
+    key <TAB>   { [ Tab, ISO_Left_Tab, BackSpace, Delete ]};
+
+    replace key <CAPS> { [ Control_L, Caps_Lock, Escape, Caps_Lock ] };
+    modifier_map Control { <CAPS>, <LCTL> };
 };
