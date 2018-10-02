@@ -1,0 +1,12 @@
+[Unit]
+Description=Locking screen on suspend
+Before=suspend.target sleep.target
+
+[Service]
+Type=forking
+User=martin
+Environment=DISPLAY=:0
+ExecStart=/home/martin/dotfiles/home/.config/i3/scripts/lock.sh
+
+[Install]
+WantedBy=suspend.target sleep.target

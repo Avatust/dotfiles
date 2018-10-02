@@ -203,7 +203,9 @@ mode "launch" {
 bindsym $mod+Menu mode "launch"
 
 # Lock screen with Super+Pause/Break
-bindsym $mod+Pause exec i3lock --color=000000 --ignore-empty-password --show-failed-attempts
+bindsym $mod+Pause exec --no-startup-id $SCRIPTS_DIR/lock.sh
+# Similarly, suspend (and lock if locker.service enabled)
+bindsym $mod+Shift+Pause exec systemctl suspend
 
 # thin borders
 hide_edge_borders both
