@@ -1,4 +1,5 @@
 #!/bin/bash
+
 PRIMARY=eDP1
 EXTERN=HDMI1
 
@@ -15,9 +16,16 @@ function is_active {
 }
 
 function are_same {
+    # strict version:
     # outputs the match or the whole expression if none
-    res_and_pos=$( echo $1 | sed -E "s/.* connected [^0-9]*([0-9]+x[0-9]+\+[0-9]+\+[0-9]+).*/\1/" )
-    echo $2 | grep -q " $res_and_pos "
+    # res_and_pos=$( echo $1 | sed -E "s/.* connected [^0-9]*([0-9]+x[0-9]+\+[0-9]+\+[0-9]+).*/\1/" )
+    # echo $2 | grep -q " $res_and_pos "
+
+    # only position is equal
+    # if monitors have different resolution seems that --auto option for xrandr
+    # uses each output's hightest resolution and then pads the rest
+    pos=$( echo $1 | sed -E "s/.* connected [^0-9]*[0-9]+x[0-9]+.([0-9]+).([0-9]+).*/.\1.\2/" )
+    echo $2 | grep -Eq " connected [^0-9]*[0-9]+x[0-9]+$pos "
 }
 
 primary=$(status $PRIMARY)
