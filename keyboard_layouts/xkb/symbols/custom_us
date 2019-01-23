@@ -66,6 +66,6 @@ xkb_symbols "custom_us" {
 
     key <TAB>   { [ Tab, ISO_Left_Tab, BackSpace, Delete ]};
 
-    replace key <CAPS> { [ Control_L, Caps_Lock, Escape, Caps_Lock ] };
+    replace key <CAPS> { [ Control_L, Control_L, Escape, Caps_Lock ] };
     modifier_map Control { <CAPS>, <LCTL> };
 };
