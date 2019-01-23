@@ -27,7 +27,7 @@ xkb_symbols "custom_us" {
     key <AD03>  { [                        e,                        E,                   eacute,                   Eacute ] };
     key <AD04>  { [                        r,                        R,               registered,               registered ] };
     key <AD05>  { [                        t,                        T,                    thorn,                    THORN ] };
-    key <AD06>  { [                        y,                        Y,               udiaeresis,               Udiaeresis ] };
+    key <AD06>  { [                        y,                        Y,                   yacute,                   Yacute ] };
     key <AD07>  { [                        u,                        U,                   uacute,                   Uacute ] };
     key <AD08>  { [                        i,                        I,                   iacute,                   Iacute ] };
     key <AD09>  { [                        o,                        O,                   oacute,                   Oacute ] };
