@@ -90,10 +90,10 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Control+Shift+space floating toggle
+bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+Control+space focus mode_toggle
+bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -134,23 +134,17 @@ bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
 
 # move focused container to workspace
-bindcode $mod+Shift+49 move container to workspace $workspacePrimary
-bindsym  $mod+Shift+1  move container to workspace $workspace1
-bindsym  $mod+Shift+2  move container to workspace $workspace2
-bindsym  $mod+Shift+3  move container to workspace $workspace3
-bindsym  $mod+Shift+4  move container to workspace $workspace4
-bindsym  $mod+Shift+5  move container to workspace $workspace5
-bindsym  $mod+Shift+6  move container to workspace $workspace6
-bindsym  $mod+Shift+7  move container to workspace $workspace7
-bindsym  $mod+Shift+8  move container to workspace $workspace8
-bindsym  $mod+Shift+9  move container to workspace $workspace9
-bindsym  $mod+Shift+0  move container to workspace $workspace10
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2
+bindsym $mod+Shift+3 move container to workspace $workspace3
+bindsym $mod+Shift+4 move container to workspace $workspace4
+bindsym $mod+Shift+5 move container to workspace $workspace5
+bindsym $mod+Shift+6 move container to workspace $workspace6
+bindsym $mod+Shift+7 move container to workspace $workspace7
+bindsym $mod+Shift+8 move container to workspace $workspace8
+bindsym $mod+Shift+9 move container to workspace $workspace9
+bindsym $mod+Shift+0 move container to workspace $workspace10
 
-# move focus/workspace to different monitor
-bindsym $mod+space focus output left
-bindsym $mod+Shift+space move workspace to output left
-
-# pin primary workspace to primary output
 workspace $workspacePrimary output $PRIMARY_OUTPUT
 
 # cycle monitor setups
@@ -208,9 +202,9 @@ mode "launch" {
 bindsym $mod+Menu mode "launch"
 
 # Lock screen with Super+Pause/Break
-bindsym $mod+Pause exec --no-startup-id $SCRIPTS_DIR/lock.sh
-# Similarly, suspend (and lock if locker.service enabled)
-bindsym $mod+Shift+Pause exec systemctl suspend
+obindsym $mod+Pause exec --no-startup-id $SCRIPTS_DIR/lock.sh
+# similarly, lock and sleep
+bindsym $mod+Shift+Pause exec i3lock --color=000000 --ignore-empty-password --show-failed-attempts; exec systemctl suspend
 
 # thin borders
 hide_edge_borders both
@@ -235,22 +229,22 @@ bar {
     strip_workspace_numbers yes
 
     colors {
-	background $bg-color
-	separator #757575
-	#                  border             background         text
-	focused_workspace  $bg-color          $bg-color          $text-color
-	inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-	urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+        background $bg-color
+        separator #757575
+        #                  border             background         text
+        focused_workspace  $bg-color          $bg-color          $text-color
+        inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+        urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
     }
 }
 
 # Screenshots
-# fullscreen
+# PrintScreen - fullscreen
 bindsym Print exec scrot $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
-# focused window
-bindsym $mod+Print exec scrot -u $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
-# mouse selection
-bindsym --release $mod+Shift+Print exec scrot -s $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
+# Ctrl+PrintScreen - focused window
+bindsym Control+Print exec scrot -u $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
+# Ctrl+Shift+PrintScreen - mouse selection
+bindsym --release Control+Shift+Print exec scrot -s $HOME/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
 
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness

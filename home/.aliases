@@ -1,3 +1,5 @@
+alias xcclip='xclip -sel clip'
+alias hag='history | ag'
 alias pkgInstall='sudo pacman -S'
 alias pkgUpdate='sudo pacman -Syu'
 alias pkgSearch='pacman -Ss'
@@ -21,6 +23,8 @@ function cs {
 alias cal='cal --monday'
 
 alias pingl='ping www.google.com'
+
+alias cclip='xclip -sel clip'
 
 
 extract () {

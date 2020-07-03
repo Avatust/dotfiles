@@ -74,3 +74,19 @@ function activate {
 
     return 0
 }
+
+AUTOENV_ENABLE_LEAVE=yep
+source ~/.autoenv/activate.sh
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/martin/mypap/sources/google-cloud-sdk/path.zsh.inc' ]; then . '/home/martin/mypap/sources/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/martin/mypap/sources/google-cloud-sdk/completion.zsh.inc' ]; then . '/home/martin/mypap/sources/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+export PATH="/home/martin/.gem/ruby/2.6.0/bin:/home/martin/.local/bin:$PATH"
+export PATH="$HOME/esp/xtensa-esp32-elf/bin:$PATH"
+export IDF_PATH="/home/martin/esp/esp-idf"
+eval `dircolors /home/martin/.dir_colors`
+
